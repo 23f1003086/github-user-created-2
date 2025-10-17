@@ -25,6 +25,7 @@
         </form>
         <div id="github-status" aria-live="polite" class="alert alert-info" style="display: none;"></div>
         <div id="github-created-at" class="mt-3"></div>
+        <div id="github-account-age" class="mt-3"></div>
     </div>
 
     <script>
@@ -44,8 +45,21 @@
                     throw new Error('User not found or API limit exceeded');
                 }
                 const data = await response.json();
-                const createdAt = new Date(data.created_at).toISOString().split('T')[0];
-                document.querySelector('#github-created-at').textContent = `Account created at: ${createdAt} UTC`;
+                const createdAt = new Date(data.created_at);
+                const createdAtFormatted = createdAt.toISOString().split('T')[0];
+                document.querySelector('#github-created-at').textContent = `Account created at: ${createdAtFormatted} UTC`;
+
+                const accountAge = new Date().getFullYear() - createdAt.getFullYear();
+                document.querySelector('#github-account-age').textContent = `Account age: ${accountAge} years`;
+
+                // Validation checks
+                if (parseInt(document.querySelector('#github-account-age').textContent, 10) < 0) {
+                    throw new Error('Account age cannot be negative');
+                }
+                if (!document.querySelector('#github-account-age').textContent.toLowerCase().includes('years')) {
+                    throw new Error('Account age format is incorrect');
+                }
+
                 document.querySelector('#github-status').textContent = 'User data fetched successfully!';
             } catch (error) {
                 document.querySelector('#github-created-at').textContent = `Error: ${error.message}`;
