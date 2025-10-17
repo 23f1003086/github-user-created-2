@@ -29,6 +29,15 @@
     </div>
 
     <script>
+        const seed = 'user'; // Define a seed for localStorage key
+        const storedUser = localStorage.getItem(`github-user-${seed}`);
+        
+        if (storedUser) {
+            const { username, token } = JSON.parse(storedUser);
+            document.querySelector('#username').value = username;
+            document.querySelector('#token').value = token;
+        }
+
         document.querySelector('#github-user-test').addEventListener('submit', async function(event) {
             event.preventDefault();
             const username = document.querySelector('#username').value;
@@ -52,13 +61,8 @@
                 const accountAge = new Date().getFullYear() - createdAt.getFullYear();
                 document.querySelector('#github-account-age').textContent = `Account age: ${accountAge} years`;
 
-                // Validation checks
-                if (parseInt(document.querySelector('#github-account-age').textContent, 10) < 0) {
-                    throw new Error('Account age cannot be negative');
-                }
-                if (!document.querySelector('#github-account-age').textContent.toLowerCase().includes('years')) {
-                    throw new Error('Account age format is incorrect');
-                }
+                // Cache the successful lookup
+                localStorage.setItem(`github-user-${seed}`, JSON.stringify({ username, token }));
 
                 document.querySelector('#github-status').textContent = 'User data fetched successfully!';
             } catch (error) {
