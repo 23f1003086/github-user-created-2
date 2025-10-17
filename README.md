@@ -2,7 +2,7 @@
 
 ## Project Description
 This project was automatically generated based on the following requirement:
-Display the account age in whole years inside #github-account-age alongside the creation date.
+Cache the last successful lookup in localStorage under "github-user-${seed}" and repopulate the form on load.
 
 ## Features
 - Implements the specified functionality
