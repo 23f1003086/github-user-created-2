@@ -2,7 +2,7 @@
 
 ## Project Description
 This project was automatically generated based on the following requirement:
-Show an aria-live alert #github-status that reports when a GitHub lookup starts, succeeds, or fails.
+Display the account age in whole years inside #github-account-age alongside the creation date.
 
 ## Features
 - Implements the specified functionality
