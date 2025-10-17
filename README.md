@@ -2,7 +2,7 @@
 
 ## Project Description
 This project was automatically generated based on the following requirement:
-Publish a Bootstrap page with form id='github-user-test' that fetches a GitHub username, optionally uses ?token=, and displays the account creation date in YYYY-MM-DD UTC inside #github-created-at.
+Show an aria-live alert #github-status that reports when a GitHub lookup starts, succeeds, or fails.
 
 ## Features
 - Implements the specified functionality
